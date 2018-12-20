@@ -6,7 +6,13 @@ import "../framework" as Framework
 Framework.FlatBase {
     id: root
     property string storiesType
-    
+    readonly property alias loading: spinner.loading
+
+    function refreshData() {
+        backEnd.clearCache();
+        loadData(1);
+    }
+
     function loadData(page) {
         spinner.start();
         backEnd.loadData(page);

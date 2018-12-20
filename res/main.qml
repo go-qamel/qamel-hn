@@ -39,11 +39,15 @@ ColumnLayout {
             Rectangle {
                 Layout.fillWidth: true
             },
-            Text {
-                text: "Built with Qamel"
-                color: "#FFF"
-                font.pixelSize: 14
-                font.family: Fonts.sourceSansPro
+            Framework.HeaderIconButton {
+                symbol: Icons.faSyncAlt
+                font.weight: Font.Bold
+                tooltip: "Refresh data"
+                onClicked: {
+                    let fragmentList = stack.data[stack.currentIndex];
+                    if (fragmentList.loading) return;
+                    fragmentList.refreshData();
+                }
             }
         ]
     }
