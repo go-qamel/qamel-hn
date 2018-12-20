@@ -4,6 +4,7 @@ import QtQuick.Controls 2.5
 
 ListView {
     id: root
+    boundsBehavior: Flickable.StopAtBounds
     ScrollBar.vertical: ScrollBar {}
 
     Keys.onPressed: function(event) {
