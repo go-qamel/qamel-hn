@@ -6,7 +6,7 @@ import "../framework" as Framework
 Framework.FlatBase {
     id: root
     property string storiesType
-
+    
     function loadData(page) {
         spinner.start();
         backEnd.loadData(page);
@@ -20,7 +20,7 @@ Framework.FlatBase {
             spinner.stop();
             pagination.maxPage = maxPage;
 
-            var data = JSON.parse(jsonData),
+            let data = JSON.parse(jsonData),
                 nData = data.length;
 
             list.model.clear();

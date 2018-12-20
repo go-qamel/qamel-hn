@@ -7,7 +7,7 @@ function getDomainName(url) {
 function relativeTime(previous, current) {
     current = current || new Date();
 
-    var msPerMinute = 60 * 1000,
+    let msPerMinute = 60 * 1000,
         msPerHour = msPerMinute * 60,
         msPerDay = msPerHour * 24,
         msPerMonth = msPerDay * 30,
