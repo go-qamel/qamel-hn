@@ -1,0 +1,14 @@
+# Exclude config file
+.vscode/
+
+# Exclude Qt file
+qamel-*
+moc-*
+*.qmlc
+*.jsc
+*_plugin_import.cpp
+
+# Exclude generated file
+qamel-hn
+qamel-hn-dev
+*.exe
