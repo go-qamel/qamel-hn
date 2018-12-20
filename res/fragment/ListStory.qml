@@ -5,19 +5,17 @@ import "../framework" as Framework
 
 Framework.FlatBase {
     id: root
-    Component.onCompleted: {
-        list.forceActiveFocus();
-        loadData(1);
-    }
+    property string storiesType
 
     function loadData(page) {
         spinner.start();
         backEnd.loadData(page);
+        pagination.currentPage = page;
     }
 
     BackEndListStory {
         id: backEnd
-        storiesType: "top"
+        storiesType: root.storiesType
         onLoaded: function(jsonData, maxPage) {
             spinner.stop();
             pagination.maxPage = maxPage;
@@ -28,6 +26,7 @@ Framework.FlatBase {
             list.model.clear();
             data.forEach(item => list.model.append(item));
             list.positionViewAtBeginning();
+            list.forceActiveFocus();
         }
         onError: function(error) {
             console.error(error);
