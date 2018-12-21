@@ -5,7 +5,6 @@ import "../style"
 Button {
     id: root
     padding: 0
-    width: 35
     enabled: !actived
     font.pixelSize: 16
     font.family: actived ? Fonts.sourceSansProSemiBold : Fonts.sourceSansPro
