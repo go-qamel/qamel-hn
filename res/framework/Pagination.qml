@@ -25,7 +25,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         Framework.PaginationButton {
             text: "< prev"
-            enabled: root.currentPage > 1
+            enabled: root.enabled && root.currentPage > 1
             onClicked: root.currentPage--
         }
         Text {
@@ -36,7 +36,7 @@ Rectangle {
         }
         Framework.PaginationButton {
             text: "next >"
-            enabled: root.currentPage < root.maxPage
+            enabled: root.enabled && root.currentPage < root.maxPage
             onClicked: root.currentPage++
         }
     }

@@ -56,8 +56,9 @@ Framework.FlatBase {
             Layout.fillWidth: true
             Layout.preferredHeight: 47
             Layout.alignment: Qt.AlignTop
-            maxPage: 0
+            maxPage: 1
             visible: maxPage >= 1
+            enabled: !root.loading
             onCurrentPageChanged: root.loadData(currentPage)
         }
 
