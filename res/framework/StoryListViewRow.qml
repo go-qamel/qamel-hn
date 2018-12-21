@@ -11,6 +11,7 @@ Rectangle {
     border.color: "#3F51B5"
     border.width: hovered ? 3 : 0
 
+    signal doubleClicked(int row)
     readonly property alias hovered: mouseArea.containsMouse
     
     Rectangle {
@@ -83,6 +84,9 @@ Rectangle {
         anchors.fill: root
         hoverEnabled: true
         propagateComposedEvents: true
-        onDoubleClicked: console.log(id)
+        onDoubleClicked: (event) => {
+            root.doubleClicked(index);
+            event.accepted = false;
+        }
     }
 }

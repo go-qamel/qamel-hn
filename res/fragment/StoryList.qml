@@ -19,7 +19,7 @@ Framework.FlatBase {
         pagination.currentPage = page;
     }
 
-    BackEndListStory {
+    BackEndStoryList {
         id: backEnd
         storiesType: root.storiesType
         onLoaded: function(jsonData, maxPage) {
@@ -70,6 +70,7 @@ Framework.FlatBase {
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignTop
             visible: !spinner.loading
+            onSelected: row => console.log(model.get(row).id)
         }
     }
 }

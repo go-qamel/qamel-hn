@@ -61,23 +61,23 @@ ColumnLayout {
             if (currentIndex <= 4) data[currentIndex].loadData(1);
         }
         
-        Fragment.ListStory {
+        Fragment.StoryList {
             storiesType: "top"
         }
 
-        Fragment.ListStory {
+        Fragment.StoryList {
             storiesType: "new"
         }
 
-        Fragment.ListStory {
+        Fragment.StoryList {
             storiesType: "show"
         }
 
-        Fragment.ListStory {
+        Fragment.StoryList {
             storiesType: "ask"
         }
 
-        Fragment.ListStory {
+        Fragment.StoryList {
             storiesType: "jobs"
         }
     }

@@ -7,6 +7,8 @@ ListView {
     boundsBehavior: Flickable.StopAtBounds
     ScrollBar.vertical: ScrollBar {}
 
+    signal selected(int row)
+
     Keys.onPressed: function(event) {
         switch (event.key) {
             case Qt.Key_Home: {
@@ -57,5 +59,6 @@ ListView {
     delegate: StoryListViewRow {
         width: Math.min(800, parent.width - 60)
         anchors.horizontalCenter: parent.horizontalCenter
+        onDoubleClicked: row => root.selected(row)
     }
 }
