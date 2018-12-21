@@ -57,9 +57,13 @@ func (b *ListStory) fetchStories(page int) {
 	}
 
 	// Calculate max page
-	maxPage := int(math.Floor(float64(len(b.storyIDs))/20.0 + 0.5))
+	maxPage := int(math.Ceil(float64(len(b.storyIDs)) / 20.0))
 
-	// Make sure page doesn't pass max page
+	// Validate page number
+	if page < 1 {
+		page = 1
+	}
+
 	if page > maxPage {
 		page = maxPage
 	}
