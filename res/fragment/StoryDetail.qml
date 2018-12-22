@@ -58,6 +58,9 @@ Framework.FlatBase {
 
                 list.model.append(comment);
             }
+            
+            list.positionViewAtBeginning();
+            list.forceActiveFocus();
         }
         onError: function(error) {
             console.error(error);

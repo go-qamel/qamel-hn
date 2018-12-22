@@ -14,6 +14,31 @@ ListView {
     property var collapsed: []
     signal linkActivated(string url)
 
+    Keys.onPressed: function(event) {
+        switch (event.key) {
+            case Qt.Key_Home: {
+                root.positionViewAtBeginning();
+                break;
+            }
+            case Qt.Key_End: {
+                root.positionViewAtEnd();
+                break;
+            }
+            case Qt.Key_PageUp: {
+                let newY = root.contentY - root.height;
+                if (newY < 0) root.positionViewAtBeginning();
+                else root.contentY = newY;
+                break;
+            }
+            case Qt.Key_PageDown: {
+                let newY = root.contentY + root.height;
+                if (newY > root.contentHeight - root.height) root.positionViewAtEnd();
+                else root.contentY = newY;
+                break;
+            }
+        }
+    }
+
     footer: Rectangle {
         height: 32
         width: parent.width
