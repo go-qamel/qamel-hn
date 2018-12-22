@@ -31,13 +31,16 @@ Rectangle {
             Layout.topMargin: 8
             font.family: Fonts.sourceSansPro
             text: {
-                let relTime = Utils.relativeTime(new Date(time * 1000));
-                return `${by} ${relTime}`;
+                let relTime = Utils.relativeTime(new Date(time * 1000)),
+                    text = `${by} ${relTime}`;
+
+                if (dead) text += ` (dead)`
+                return text;
             }
         }
 
         TextArea {
-            color: "#000"
+            color: dead ? "#888" : "#000"
             selectionColor: "#1A237E"
             selectedTextColor: "#FFF"
             leftPadding: 0
