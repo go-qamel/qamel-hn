@@ -8,6 +8,12 @@ Framework.FlatBase {
     property string storiesType
     readonly property alias loading: spinner.loading
 
+    signal openStory(int id)
+
+    function openInBrowser() {
+        backEnd.openURL();
+    }
+
     function refreshData() {
         backEnd.clearCache();
         loadData(1);
@@ -70,7 +76,7 @@ Framework.FlatBase {
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignTop
             visible: !spinner.loading
-            onSelected: row => console.log(model.get(row).id)
+            onSelected: row => root.openStory(model.get(row).id)
         }
     }
 }

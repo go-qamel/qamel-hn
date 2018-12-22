@@ -7,6 +7,7 @@ import (
 
 func init() {
 	RegisterQmlStoryList("BackEnd", 1, 0, "BackEndStoryList")
+	RegisterQmlStoryDetail("BackEnd", 1, 0, "BackEndStoryDetail")
 }
 
 func encodeJSON(src interface{}) (string, error) {

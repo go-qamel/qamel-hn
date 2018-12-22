@@ -15,7 +15,7 @@ Rectangle {
     RowLayout {
         id: row
         spacing: 30
-        width: parent.width > 800 ? 800 : parent.width-60
+        width: Math.min(800, parent.width - 60)
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
     }

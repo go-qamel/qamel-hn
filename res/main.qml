@@ -44,9 +44,18 @@ ColumnLayout {
                 font.weight: Font.Bold
                 tooltip: "Refresh data"
                 onClicked: {
-                    let fragmentList = stack.data[stack.currentIndex];
-                    if (fragmentList.loading) return;
-                    fragmentList.refreshData();
+                    let fragment = stack.data[stack.currentIndex];
+                    if (fragment.loading) return;
+                    fragment.refreshData();
+                }
+            },
+            Framework.HeaderIconButton {
+                symbol: Icons.faGlobe
+                font.weight: Font.Bold
+                tooltip: "Open in browser"
+                onClicked: {
+                    let fragment = stack.data[stack.currentIndex];
+                    fragment.openInBrowser();
                 }
             }
         ]
@@ -56,29 +65,45 @@ ColumnLayout {
         id: stack
         Layout.fillWidth: true
         Layout.fillHeight: true
+        onCurrentIndexChanged: {
+            if (count > 5 && currentIndex <= 4) {
+                for (let i = 5; i < count; i++) {
+                    data[i].destroy();
+                }
+            }
 
-        onCurrentIndexChanged: function() {
             if (currentIndex <= 4) data[currentIndex].loadData(1);
+        }
+
+        function openStory(id) {
+            var fragment = Qt.createComponent("fragment/StoryDetail.qml")
+                             .createObject(stack, {storyId: id});
+            stack.currentIndex = stack.count - 1;
         }
         
         Fragment.StoryList {
             storiesType: "top"
+            onOpenStory: id => stack.openStory(id)
         }
 
         Fragment.StoryList {
             storiesType: "new"
+            onOpenStory: id => stack.openStory(id)
         }
 
         Fragment.StoryList {
             storiesType: "show"
+            onOpenStory: id => stack.openStory(id)
         }
 
         Fragment.StoryList {
             storiesType: "ask"
+            onOpenStory: id => stack.openStory(id)
         }
 
         Fragment.StoryList {
             storiesType: "jobs"
+            onOpenStory: id => stack.openStory(id)
         }
     }
 }
