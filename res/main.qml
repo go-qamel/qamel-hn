@@ -1,4 +1,4 @@
-import QtQuick 2.11
+import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
 import "framework" as Framework
@@ -11,6 +11,18 @@ ColumnLayout {
 
     Framework.Header {
         contents: [
+            Framework.HeaderLogo {
+                visible: stack.currentIndex <= 4
+            },
+            Framework.HeaderIconButton {
+                id: btnBack
+                symbol: Icons.faArrowLeft
+                font.weight: Font.Bold
+                tooltip: "Back"
+                visible: stack.currentIndex > 4
+                onClicked: stack.currentIndex = prevIndex
+                property int prevIndex
+            },
             Framework.HeaderButton {
                 text: "Top"
                 actived: stack.currentIndex === 0
@@ -72,12 +84,14 @@ ColumnLayout {
                 }
             }
 
-            if (currentIndex <= 4) data[currentIndex].loadData(1);
+            if (currentIndex <= 4 && count <= 5) data[currentIndex].loadData(1);
         }
 
         function openStory(id) {
             var fragment = Qt.createComponent("fragment/StoryDetail.qml")
                              .createObject(stack, {storyId: id});
+            
+            btnBack.prevIndex = stack.currentIndex;
             stack.currentIndex = stack.count - 1;
         }
         
