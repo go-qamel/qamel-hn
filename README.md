@@ -1,7 +1,7 @@
 Qamel HN
 ---
 
-HackerNews clone built with QML + Go. Intended as demo for [`qamel`](https://github.com/RadhiFadlillah/qamel).
+HackerNews clone built with QML + Go. Intended as demo for [`qamel`](https://github.com/RadhiFadlillah/qamel). You can download the pre-compiled binary in [release](https://github.com/RadhiFadlillah/qamel-hn/releases) page.
 
 ![Screenshot](https://raw.githubusercontent.com/RadhiFadlillah/qamel-hn/master/screenshot.png)
 
