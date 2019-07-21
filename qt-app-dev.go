@@ -18,6 +18,9 @@ func runQtApp(argc int, argv []string) {
 	app.SetApplicationDisplayName("Qamel HN")
 	app.SetWindowIcon(":/res/icon.png")
 
+	// Register qamel model
+	qamel.RegisterQmlListModel("Qamel", 1, 0, "ListModel")
+
 	// Create viewer
 	view := qamel.NewViewer()
 	view.SetSource("res/main.qml")

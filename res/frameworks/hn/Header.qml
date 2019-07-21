@@ -1,8 +1,6 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
-import "../style"
-import "../framework" as Framework
 
 Rectangle {
     z: 1

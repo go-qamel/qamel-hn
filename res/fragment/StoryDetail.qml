@@ -1,85 +1,120 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
-import QtQuick.Controls 2.5
-import BackEnd 1.0
-import "../framework" as Framework
+import QtQuick.Controls 2.12
+import BackEnd 1.0 as BackEnd
+import Qamel 1.0 as Qamel
+import "../frameworks/hn" as HN
 
-Framework.FlatBase {
+HN.Background {
     id: root
 
     property int storyId
     property string storyURL
     readonly property alias loading: spinner.loading
 
-    Component.onCompleted: backEnd.loadData(storyId)
-
-    function loadData() {}
-
-    function refreshData() {
-        spinner.start();
-        backEnd.loadData(storyId);
-    }
-
     function openInBrowser() {
         if (storyURL === '') return;
         backEnd.openURL(storyURL);
     }
 
-    BackEndStoryDetail {
+    function loadData() {
+        spinner.start();
+        backEnd.loadData(storyId);
+    }
+
+    Component.onCompleted: loadData()
+
+    BackEnd.StoryDetail {
         id: backEnd
-        onLoaded: function(jsonData) {
-            spinner.stop();
 
-            let data = JSON.parse(jsonData),
-                nComment = data.comments.length;
-
-            root.storyURL = data.url;
-            list.story = {
-                by: data.by,
-                title: data.title,
-                url: data.url,
-                time: data.time,
-                score: data.score,
-                text: data.text,
-                descendants: data.descendants,
-            }
-
-            list.model.clear();
-            for (let i = 0; i < nComment; i++) {
-                let comment = data.comments[i],
-                    kids = comment.kids || [],
-                    parents = comment.parents || [];
-                
-                comment.content = comment.text;
-                comment.nKids = kids.length;
-                comment.parents = parents.join('|');
-                comment.nParents = parents.length;
-                delete comment.text;
-
-                list.model.append(comment);
-            }
-            
-            list.positionViewAtBeginning();
-            list.forceActiveFocus();
-        }
-        onError: function(error) {
+        function _onError(error) {
             console.error(error);
             spinner.stop();
         }
+
+        function _onLoaded(jsonValue) {
+            spinner.stop();
+
+
+            let data = JSON.parse(jsonValue),
+                story = data.story,
+                comments = data.comments;
+
+            list.story = story;
+            list.model.contents = comments;
+            root.storyURL = story.url;
+
+            list.positionViewAtBeginning();
+            list.forceActiveFocus();
+        }
+
+        onError: (err) => _onError(err)
+        onLoaded: (jsonValue) => _onLoaded(jsonValue)
     }
 
-    Framework.LoadingSpinner {
+    HN.LoadingSpinner {
         id: spinner
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
         visible: loading
     }
 
-    Framework.CommentListView {
+    HN.CommentListView {
         id: list
-        model: ListModel {}
-        anchors.fill: parent
+
+        property var story: {}
+        property var collapsed: []
+
         visible: !loading
-        onLinkActivated: url => backEnd.openURL(url)
+        anchors.fill: parent
+        model: Qamel.ListModel {}
+
+        header: HN.CommentListViewHeader {
+            story: list.story
+            onLinkActivated: (url) => backEnd.openURL(url)
+        }
+
+        delegate: HN.CommentListViewRow {
+            function _visible() {
+                if (index < 0) return true;
+
+                let parents = list.model.get(index).parents,
+                    isCollapsed = parents.some(parentId => {
+                    return list.collapsed.indexOf(parentId) !== -1;
+                });
+
+                return !isCollapsed;
+            }
+
+            function _isLastRow() {
+                if (index < 0) return false;
+                return index === list.model.count() - 1;
+            }
+
+            function _repliesCollapsed() {
+                if (index < 0) return false;
+                let id = list.model.get(index).id;
+                return list.collapsed.indexOf(id) !== -1;
+            }
+
+            function _onToggleReplies(row) {
+                let id = list.model.get(row).id,
+                    idx = list.collapsed.indexOf(id),
+                    collapsed = list.collapsed;
+
+                if (idx === -1) collapsed.push(id);
+                else collapsed.splice(idx, 1);
+
+                list.collapsed = collapsed;
+            }
+
+            comment: display
+            visible: _visible()
+            isLastRow: _isLastRow()
+            repliesCollapsed: _repliesCollapsed()
+            onToggleReplies: (row) => _onToggleReplies(row)
+            onLinkActivated: (url) => backEnd.openURL(url)
+            height: visible ? defaultHeight : 0
+        }
     }
 }

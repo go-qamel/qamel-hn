@@ -45,8 +45,12 @@ func (b *StoryDetail) fetchStory(id int) {
 	}
 
 	// Encode data to JSON
-	story.Comments = comments
-	jsonData, _ := encodeJSON(&story)
+	finalData := map[string]interface{}{
+		"story":    story,
+		"comments": comments,
+	}
+
+	jsonData, _ := encodeJSON(&finalData)
 	b.loaded(jsonData)
 }
 

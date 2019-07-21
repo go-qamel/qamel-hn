@@ -1,15 +1,7 @@
 import QtQuick 2.12
-import "../style"
+import "../../fonts/FontAwesome" as FA
 
 Text {
-    color: "#555"
-    text: Icons.faSpinner
-    font.pixelSize: 60
-    font.weight: Font.Bold
-    font.family: Fonts.fontAwesomeIcons
-    verticalAlignment: Text.AlignVCenter
-    horizontalAlignment: Text.AlignHCenter
-
     readonly property alias loading: rotator.running
 
     function start() {
@@ -20,10 +12,17 @@ Text {
         rotator.stop();
     }
 
+    color: "#555"
+    text: FA.Icons.faSpinner
+    verticalAlignment: Text.AlignVCenter
+    horizontalAlignment: Text.AlignHCenter
+    font { pixelSize: 60; weight: Font.Bold; family: FA.Fonts.regular }
+
     RotationAnimator on rotation {
         id: rotator
-        from: 0;
-        to: 360;
+
+        from: 0
+        to: 360
         duration: 1500
         loops: Animation.Infinite
     }

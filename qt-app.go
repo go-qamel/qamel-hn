@@ -13,6 +13,8 @@ func runQtApp(argc int, argv []string) {
 	app.SetApplicationDisplayName("Qamel HN")
 	app.SetWindowIcon(":/res/icon.png")
 
+	qamel.RegisterQmlListModel("Qamel", 1, 0, "ListModel")
+
 	view := qamel.NewViewer()
 	view.SetSource("qrc:/res/main.qml")
 	view.SetResizeMode(qamel.SizeRootObjectToView)

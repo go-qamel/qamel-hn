@@ -1,49 +1,49 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
-import "framework" as Framework
 import "fragment" as Fragment
-import "style"
+import "frameworks/hn" as HN
+import "fonts/FontAwesome" as FA
 
 ColumnLayout {
     spacing: 0
     anchors.fill: parent
 
-    Framework.Header {
+    HN.Header {
         contents: [
-            Framework.HeaderLogo {
+            HN.HeaderLogo {
                 visible: stack.currentIndex <= 4
             },
-            Framework.HeaderIconButton {
+            HN.HeaderIconButton {
                 id: btnBack
-                symbol: Icons.faArrowLeft
+                symbol: FA.Icons.faArrowLeft
                 font.weight: Font.Bold
                 tooltip: "Back"
                 visible: stack.currentIndex > 4
                 onClicked: stack.currentIndex = prevIndex
                 property int prevIndex
             },
-            Framework.HeaderButton {
+            HN.HeaderButton {
                 text: "Top"
                 actived: stack.currentIndex === 0
                 onClicked: stack.currentIndex = 0
             },
-            Framework.HeaderButton {
+            HN.HeaderButton {
                 text: "New"
                 actived: stack.currentIndex === 1
                 onClicked: stack.currentIndex = 1
             },
-            Framework.HeaderButton {
+            HN.HeaderButton {
                 text: "Show"
                 actived: stack.currentIndex === 2
                 onClicked: stack.currentIndex = 2
             },
-            Framework.HeaderButton {
+            HN.HeaderButton {
                 text: "Ask"
                 actived: stack.currentIndex === 3
                 onClicked: stack.currentIndex = 3
             },
-            Framework.HeaderButton {
+            HN.HeaderButton {
                 text: "Jobs"
                 actived: stack.currentIndex === 4
                 onClicked: stack.currentIndex = 4
@@ -51,8 +51,8 @@ ColumnLayout {
             Rectangle {
                 Layout.fillWidth: true
             },
-            Framework.HeaderIconButton {
-                symbol: Icons.faSyncAlt
+            HN.HeaderIconButton {
+                symbol: FA.Icons.faSyncAlt
                 font.weight: Font.Bold
                 tooltip: "Refresh data"
                 onClicked: {
@@ -61,8 +61,8 @@ ColumnLayout {
                     fragment.refreshData();
                 }
             },
-            Framework.HeaderIconButton {
-                symbol: Icons.faGlobe
+            HN.HeaderIconButton {
+                symbol: FA.Icons.faGlobe
                 font.weight: Font.Bold
                 tooltip: "Open in browser"
                 onClicked: {
@@ -89,12 +89,12 @@ ColumnLayout {
 
         function openStory(id) {
             var fragment = Qt.createComponent("fragment/StoryDetail.qml")
-                             .createObject(stack, {storyId: id});
+                .createObject(stack, {storyId: id});
             
             btnBack.prevIndex = stack.currentIndex;
             stack.currentIndex = stack.count - 1;
         }
-        
+
         Fragment.StoryList {
             storiesType: "top"
             onOpenStory: id => stack.openStory(id)

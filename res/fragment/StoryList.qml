@@ -1,9 +1,9 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
-import BackEnd 1.0
-import "../framework" as Framework
+import BackEnd 1.0 as BackEnd
+import "../frameworks/hn" as HN
 
-Framework.FlatBase {
+HN.Background {
     id: root
     property string storiesType
     readonly property alias loading: spinner.loading
@@ -25,7 +25,7 @@ Framework.FlatBase {
         pagination.currentPage = page;
     }
 
-    BackEndStoryList {
+    BackEnd.StoryList {
         id: backEnd
         storiesType: root.storiesType
         onLoaded: function(jsonData, maxPage) {
@@ -46,7 +46,7 @@ Framework.FlatBase {
         }
     }
 
-    Framework.LoadingSpinner {
+    HN.LoadingSpinner {
         id: spinner
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
@@ -57,7 +57,7 @@ Framework.FlatBase {
         spacing: 0
         anchors.fill: parent
     
-        Framework.Pagination {
+        HN.Pagination {
             id: pagination
             Layout.fillWidth: true
             Layout.preferredHeight: 47
@@ -68,7 +68,7 @@ Framework.FlatBase {
             onCurrentPageChanged: root.loadData(currentPage)
         }
 
-        Framework.StoryListView {
+        HN.StoryListView {
             id: list
             focus: true
             model: ListModel {}
@@ -76,7 +76,12 @@ Framework.FlatBase {
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignTop
             visible: !spinner.loading
-            onSelected: row => root.openStory(model.get(row).id)
+
+            delegate: HN.StoryListViewRow {
+                width: Math.min(800, parent.width - 60)
+                anchors.horizontalCenter: parent.horizontalCenter
+                onDoubleClicked: (row) => root.openStory(list.model.get(row).id)
+            }
         }
     }
 }
