@@ -12,3 +12,6 @@ moc-*
 qamel-hn
 qamel-hn-dev
 *.exe
+
+# Exclude vendor dir
+/vendor

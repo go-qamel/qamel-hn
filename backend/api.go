@@ -3,7 +3,7 @@ package backend
 import (
 	"fmt"
 
-	"github.com/go-resty/resty"
+	"gopkg.in/resty.v1"
 )
 
 // Story is the story that submitted in HN
