@@ -3,7 +3,6 @@
 package main
 
 import (
-	"go/build"
 	"os"
 	fp "path/filepath"
 
@@ -19,19 +18,21 @@ func runQtApp(argc int, argv []string) {
 	app.SetApplicationDisplayName("Qamel HN")
 	app.SetWindowIcon(":/res/icon.png")
 
-	// Define path to resource directory
-	gopath := build.Default.GOPATH
-	resDir := fp.Join(gopath, "src", "qamel-hn", "res")
-
 	// Create viewer
 	view := qamel.NewViewer()
-	view.SetSource(fp.Join(resDir, "main.qml"))
+	view.SetSource("res/main.qml")
 	view.SetResizeMode(qamel.SizeRootObjectToView)
 	view.SetHeight(600)
 	view.SetWidth(800)
 	view.ShowMaximized()
 
 	// Watch change in resource dir
+	projectDir, err := os.Getwd()
+	if err != nil {
+		logrus.Fatalln("Failed to get working directory:", err)
+	}
+
+	resDir := fp.Join(projectDir, "res")
 	go view.WatchResourceDir(resDir)
 
 	// Exec app
