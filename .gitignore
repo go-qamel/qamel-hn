@@ -11,6 +11,7 @@ moc-*
 # Exclude generated file
 qamel-hn
 qamel-hn-dev
+.qamel-cache
 *.exe
 
 # Exclude vendor dir
