@@ -1,7 +1,7 @@
 Qamel HN
 ---
 
-HackerNews reader that inspired by [Vue-HN](). It's built with QML + Go and intended as demo for [`qamel`](https://github.com/RadhiFadlillah/qamel). You can download the pre-compiled binary in [release](https://github.com/RadhiFadlillah/qamel-hn/releases) page.
+HackerNews reader that inspired by [Vue-HN](https://vue-hn.herokuapp.com/top). It's built with QML + Go and intended as demo for [`qamel`](https://github.com/RadhiFadlillah/qamel). You can download the pre-compiled binary in [release](https://github.com/RadhiFadlillah/qamel-hn/releases) page.
 
 ![Screenshot](https://raw.githubusercontent.com/RadhiFadlillah/qamel-hn/master/screenshot.png)
 
