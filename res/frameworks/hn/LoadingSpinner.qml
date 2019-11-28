@@ -16,7 +16,7 @@ Text {
     text: FA.Icons.faSpinner
     verticalAlignment: Text.AlignVCenter
     horizontalAlignment: Text.AlignHCenter
-    font { pixelSize: 60; weight: Font.Bold; family: FA.Fonts.regular }
+    font { pixelSize: 60; weight: Font.Bold; family: FA.Fonts.solid }
 
     RotationAnimator on rotation {
         id: rotator

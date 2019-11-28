@@ -12,7 +12,7 @@ Button {
     implicitWidth: 30
     implicitHeight: 30
     opacity: enabled ? 1 : 0.6
-    font { pixelSize: 14; family: FA.Fonts.regular }
+    font { weight: Font.Bold; pixelSize: 14; family: FA.Fonts.solid }
 
     HN.ToolTip {
         text: root.tooltip
