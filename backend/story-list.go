@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/RadhiFadlillah/qamel"
+	"github.com/go-qamel/qamel"
 	"github.com/pkg/browser"
 	"github.com/sirupsen/logrus"
 )

@@ -1,13 +1,13 @@
 Qamel HN
 ---
 
-HackerNews reader that inspired by [Vue-HN](https://vue-hn.herokuapp.com/top). It's built with QML + Go and intended as demo for [`qamel`](https://github.com/RadhiFadlillah/qamel). You can download the pre-compiled binary in [release](https://github.com/RadhiFadlillah/qamel-hn/releases) page.
+HackerNews reader that inspired by [Vue-HN](https://vue-hn.herokuapp.com/top). It's built with QML + Go and intended as demo for [`qamel`](https://github.com/go-qamel/qamel). You can download the pre-compiled binary in [release](https://github.com/go-qamel/qamel-hn/releases) page.
 
 ![Screenshot](https://raw.githubusercontent.com/RadhiFadlillah/qamel-hn/master/screenshot.png)
 
 ### How to Build
 
-Before building this app, make sure `qamel` has been [installed](https://github.com/RadhiFadlillah/qamel/wiki/Installation) on your system. If it's already installed, do following steps :
+Before building this app, make sure `qamel` has been [installed](https://github.com/go-qamel/qamel/wiki/Installation) on your system. If it's already installed, do following steps :
 
 - Clone or download this repository to your local directory
 - Open the directory from terminal

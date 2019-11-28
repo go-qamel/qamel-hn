@@ -6,7 +6,7 @@ import (
 	"os"
 	fp "path/filepath"
 
-	"github.com/RadhiFadlillah/qamel"
+	"github.com/go-qamel/qamel"
 	"github.com/sirupsen/logrus"
 )
 

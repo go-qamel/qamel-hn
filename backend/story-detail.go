@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/RadhiFadlillah/qamel"
+	"github.com/go-qamel/qamel"
 	"github.com/pkg/browser"
 )
 

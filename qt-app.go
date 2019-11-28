@@ -5,7 +5,7 @@ package main
 import (
 	"os"
 
-	"github.com/RadhiFadlillah/qamel"
+	"github.com/go-qamel/qamel"
 )
 
 func runQtApp(argc int, argv []string) {
